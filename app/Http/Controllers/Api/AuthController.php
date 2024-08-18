@@ -18,7 +18,7 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response([
                 'message' => 'Provided email or password is incorrect'
-            ]);
+            ], 422);
         }
 
         /**
@@ -52,14 +52,7 @@ class AuthController extends Controller
          */
         $user = $request->user();
         $user->currentAccessToken()->delete();
+        ;
         return response('', 204);
-    }
-
-    public function info()
-    {
-        return response([
-            'name' => 'ali',
-            'faternMe' => 'alavi'
-        ]);
     }
 }
